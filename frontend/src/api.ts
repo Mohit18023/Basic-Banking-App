@@ -4,17 +4,35 @@ import { User, Transfer } from './types';
 
 const API_URL = 'http://localhost:5000/api';
 
+
+
 export const getUsers = async (): Promise<User[]> => {
-  const response = await axios.get(`${API_URL}/users`);
-  return response.data;
+  let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'http://localhost:5000/api/user/users',
+  headers: { }
+};
+
+// axios.request(config)
+// .then((response) => {
+//   return response.data;
+// })
+  const users = await axios.request(config);
+  return users.data;
 };
 
 export const getUserById = async (id: number): Promise<User> => {
-  const response = await axios.get(`${API_URL}/users/${id}`);
+  const response = await axios.get(`${API_URL}/user/get/${id}`);
   return response.data;
 };
 
 export const createTransfer = async (transfer: Omit<Transfer, 'id' | 'date'>): Promise<Transfer> => {
-  const response = await axios.post(`${API_URL}/transfers`, transfer);
+  const response = await axios.post(`${API_URL}/transfer/transfers`, transfer);
   return response.data;
 };
+
+export const userHistory = async(id:number): Promise<Transfer[]> =>{
+  const response = await axios.get(`${API_URL}/transfer/history/${id}`);
+  return response.data;
+}
