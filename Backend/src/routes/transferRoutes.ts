@@ -1,25 +1,27 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { prisma } from '../prisma';
-import { where } from 'sequelize';
 
 const router: Router = Router();
 
-router.get('/records', async (req, res) => {
-  
+// Get all transfer records
+router.get('/records', async (req: Request, res: Response) => {
   try {
     const transfers = await prisma.transfer.findMany();
-    
     res.json(transfers);
   } catch (err) {
-    
+    console.error("Error fetching transfer records:", err);
     res.status(500).json({ error: "Unable to fetch transfer records" });
   }
 });
 
 // Fetch transfer history for a specific user
-router.get('/history/:id', async (req, res) => {
+router.get('/history/:id', async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.id);
+
+    if (isNaN(userId)) {
+      return res.status(400).json({ error: "Invalid user ID" });
+    }
 
     const history = await prisma.transfer.findMany({
       where: {
@@ -37,31 +39,41 @@ router.get('/history/:id', async (req, res) => {
   }
 });
 
-router.post('/transfers', async (req, res) => {
+// Create a new transfer
+router.post('/transfers', async (req: Request, res: Response) => {
   const { fromUserId, toUserId, amount } = req.body;
 
-  // Basic validation
-  if (!fromUserId || !toUserId || !amount) {
+  if (!fromUserId || !toUserId || amount == null) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
+  const parsedFromUserId = parseInt(fromUserId);
+  const parsedToUserId = parseInt(toUserId);
+
+  if (isNaN(parsedFromUserId) || isNaN(parsedToUserId) || isNaN(amount)) {
+    return res.status(400).json({ error: "Invalid input data" });
+  }
+
   try {
-    // Using a transaction to ensure atomicity
     const transfer = await prisma.$transaction(async (prisma) => {
       const fromUser = await prisma.user.update({
-        where: { id: fromUserId },
+        where: { id: parsedFromUserId },
         data: { balance: { decrement: amount } },
       });
 
+      if (fromUser.balance < 0) {
+        throw new Error("Insufficient balance");
+      }
+
       const toUser = await prisma.user.update({
-        where: { id: toUserId },
+        where: { id: parsedToUserId },
         data: { balance: { increment: amount } },
       });
 
       return prisma.transfer.create({
         data: {
-          fromUserId,
-          toUserId,
+          fromUserId: parsedFromUserId,
+          toUserId: parsedToUserId,
           amount,
         },
       });
