@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install & tsc",
-    "start": "nodemon dist/index.js",
+    "build": "npm install @types/express @types/sequelize @types/cors @types/node @prisma/client & tsc",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
