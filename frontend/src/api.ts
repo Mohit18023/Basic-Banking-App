@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { User, Transfer } from './types';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://basic-banking-app-2imk.onrender.com/api';
 
 
 
@@ -10,7 +10,7 @@ export const getUsers = async (): Promise<User[]> => {
   let config = {
   method: 'get',
   maxBodyLength: Infinity,
-  url: 'http://localhost:5000/api/user/users',
+  url: `${API_URL}/user/users`,
   headers: { }
 };
 
