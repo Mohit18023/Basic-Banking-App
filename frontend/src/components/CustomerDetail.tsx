@@ -117,7 +117,7 @@ const CustomerDetail: React.FC = () => {
                 <li key={transfer.id} className="flex items-center border-b border-gray-700 pb-4">
                   <div className="flex items-center space-x-4 w-full">
                     <img
-                      src={`/src/assets/images/${otherUser?.name}.jpg`} 
+                      src={`/assets/images/${otherUser?.name}.jpg`} 
                       alt={otherUser?.name} 
                       onError={(e) => (e.currentTarget.src = `/src/assets/images/default.jpg`)}
                       className="w-12 h-12 rounded-full object-cover"

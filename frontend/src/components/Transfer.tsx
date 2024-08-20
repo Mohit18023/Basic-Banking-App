@@ -148,7 +148,7 @@ const Transfer: React.FC = () => {
                           className="flex items-center p-2 w-full text-left hover:bg-gray-700"
                         >
                           <img
-                            src={`/src/assets/images/${user.name}.jpg`}
+                            src={`/assets/images/${user.name}.jpg`}
                             alt={user.name}
                             className="w-8 h-8 rounded-full"
                           />

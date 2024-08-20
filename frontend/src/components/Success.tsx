@@ -96,7 +96,7 @@ const Success: React.FC = () => {
         <ul className="text-white space-y-2">
           <li className="flex items-center">
             <img 
-              src={`/src/assets/images/${fromUser.name}.jpg`} 
+              src={`/assets/images/${fromUser.name}.jpg`} 
               alt={fromUser.name} 
               className="w-12 h-12 rounded-full mr-4 object-cover"
             />
@@ -104,7 +104,7 @@ const Success: React.FC = () => {
           </li>
           <li className="flex items-center">
             <img 
-              src={`/src/assets/images/${toUser.name}.jpg`} 
+              src={`/assets/images/${toUser.name}.jpg`} 
               alt={toUser.name} 
               className="w-12 h-12 rounded-full mr-4 object-cover"
             />

@@ -7,7 +7,7 @@ const Customers: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const DEFAULT_IMAGE = '/src/assets/images/default.jpg';
+  const DEFAULT_IMAGE = '/assets/images/default.jpg';
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -44,7 +44,7 @@ const Customers: React.FC = () => {
                 className="bg-gray-800 p-6 rounded-lg text-center hover:bg-gray-700 transition duration-200 transform hover:scale-105"
               >
                 <img
-                  src={`/src/assets/images/${user.name}.jpg`}
+                  src={`/assets/images/${user.name}.jpg`}
                   alt={user.name}
                   onError={(e) => (e.currentTarget.src = DEFAULT_IMAGE)}
                   className="w-32 h-32 rounded-full mx-auto mb-6"
