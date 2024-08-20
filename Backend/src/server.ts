@@ -8,7 +8,7 @@ const app: Application = express();
 
 // Middleware
 const corsOptions = {
-  origin: 'http://localhost:5173', // Specify the allowed origin
+  origin: ['http://localhost:5173', 'https://basic-banking-app-nine.vercel.app'], // Specify the allowed origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204
