@@ -7,7 +7,13 @@ import customerRoutes from './routes/customerRoutes';
 const app: Application = express();
 
 // Middleware
-app.use(cors()); // You may want to configure CORS with specific origins
+const corsOptions = {
+  origin: 'http://localhost:5173', // Specify the allowed origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
