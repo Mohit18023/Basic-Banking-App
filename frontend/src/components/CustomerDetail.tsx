@@ -119,7 +119,7 @@ const CustomerDetail: React.FC = () => {
                     <img
                       src={`/assets/images/${otherUser?.name}.jpg`} 
                       alt={otherUser?.name} 
-                      onError={(e) => (e.currentTarget.src = `/src/assets/images/default.jpg`)}
+                      onError={(e) => (e.currentTarget.src = `/assets/images/default.jpg`)}
                       className="w-12 h-12 rounded-full object-cover"
                     />
                     <div className="flex flex-col w-full">
