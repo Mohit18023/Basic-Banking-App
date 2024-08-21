@@ -88,7 +88,7 @@ const CustomerDetail: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4 space-y-6">
       <img 
-        src={`/src/assets/images/${user.name}.jpg`} 
+        src={`/assets/images/${user.name}.jpg`} 
         alt={user.name} 
         onError={(e) => (e.currentTarget.src = `/src/assets/images/default.jpg`)}
         className="w-36 h-36 rounded-full mb-4 object-cover"
